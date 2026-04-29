@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar";
 import ProfileList from "@/components/profileList";
 import Search from "@/components/search";
 import Account from "@/components/accounts";
+import ProfileDetails from "@/components/profileDetails";
 
 function Dashboard() {
   const [activePage, setActivePage] = useState("Dashboard");
@@ -12,7 +13,7 @@ function Dashboard() {
   const renderContent = () => {
     if (activePage === "Profiles" && selectedProfileId) {
       return (
-        <ProfileDetail
+        <ProfileDetails
           id={selectedProfileId}
           onBack={() => setSelectedProfileId(null)}
         />
