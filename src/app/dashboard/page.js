@@ -6,10 +6,19 @@ import ProfileList from "@/components/profileList";
 
 function Dashboard() {
   const [activePage, setActivePage] = useState("Dashboard");
-
+  const [selectedProfileId, setSelectedProfileId] = useState(null);
   const renderContent = () => {
+    if (activePage === "Profiles" && selectedProfileId) {
+      return (
+        <ProfileDetail
+          id={selectedProfileId}
+          onBack={() => setSelectedProfileId(null)}
+        />
+      );
+    }
+
     if (activePage === "Profiles") {
-      return <ProfileList />;
+      return <ProfileList onSelect={setSelectedProfileId} />;
     }
 
     if (activePage === "Search") {
@@ -31,7 +40,6 @@ function Dashboard() {
       </div>
     );
   };
-
   return (
     <div className="flex h-screen overflow-hidden bg-neutral-50">
       <Sidebar activePage={activePage} setActivePage={setActivePage} />

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import useProfile from "@/hooks/profile";
 
-function ProfileList() {
+function ProfileList({ onSelect }) {
   const { getProfiles } = useProfile();
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,20 +28,15 @@ function ProfileList() {
   }, [page]);
 
   if (loading)
-    return (
-      <p className="p-6 text-neutral-500">Loading profiles...</p>
-    );
+    return <p className="p-6 text-neutral-500">Loading profiles...</p>;
 
-  if (error)
-    return <p className="p-6 text-red-500">{error}</p>;
+  if (error) return <p className="p-6 text-red-500">{error}</p>;
 
   return (
     <div className="p-6 bg-neutral-50 min-h-screen">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-neutral-800">
-          Profiles
-        </h1>
+        <h1 className="text-2xl font-semibold text-neutral-800">Profiles</h1>
         <p className="text-sm text-neutral-500">
           Manage and view all user profiles
         </p>
@@ -66,10 +61,7 @@ function ProfileList() {
           <tbody>
             {profiles.length === 0 ? (
               <tr>
-                <td
-                  colSpan={8}
-                  className="text-center py-6 text-neutral-400"
-                >
+                <td colSpan={8} className="text-center py-6 text-neutral-400">
                   No profiles found
                 </td>
               </tr>
@@ -85,9 +77,7 @@ function ProfileList() {
                   <td className="px-4 py-3 capitalize text-neutral-600">
                     {profile.gender}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600">
-                    {profile.age}
-                  </td>
+                  <td className="px-4 py-3 text-neutral-600">{profile.age}</td>
                   <td className="px-4 py-3 capitalize text-neutral-600">
                     {profile.age_group}
                   </td>
@@ -103,12 +93,12 @@ function ProfileList() {
 
                   {/* FIXED ACTIONS */}
                   <td className="px-4 py-3">
-                    <a
-                      href={`/profiles/${profile.id}`}
-                      className="text-sm font-medium text-neutral-800 hover:text-black hover:underline"
+                    <button
+                      onClick={() => onSelect(profile.id)}
+                      className="text-sm font-medium text-neutral-800 hover:underline"
                     >
                       View
-                    </a>
+                    </button>
                   </td>
                 </tr>
               ))
