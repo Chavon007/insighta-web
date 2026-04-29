@@ -14,7 +14,40 @@ function useProfile() {
     return data;
   };
 
-  return { getProfiles };
+  const getProfileDetails = async ({ id }) => {
+    const res = await fetch(`${API_URL}/API/Profiles/${id}`, {
+      credentials: "include",
+      headers: {
+        "X-API-Version": "1",
+      },
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch profiles");
+
+    const data = await res.json();
+    return data;
+  };
+
+  const exportProfiles = async () => {
+    const res = await fetch(`${API_URL}/api/profiles/export?format=csv`, {
+      credentials: "include",
+      headers: {
+        "X-API-Version": "1",
+      },
+    });
+
+    if (!res.ok) throw new Error("Failed to export profiles");
+
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `profiles_${Date.now()}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  return { getProfiles, getProfileDetails, exportProfiles };
 }
 
 export default useProfile;
