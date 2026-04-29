@@ -3,6 +3,8 @@ import { useState } from "react";
 import Sidebar from "@/components/sidebar";
 import Navbar from "@/components/navbar";
 import ProfileList from "@/components/profileList";
+import Search from "@/components/search";
+import Account from "@/components/accounts";
 
 function Dashboard() {
   const [activePage, setActivePage] = useState("Dashboard");
@@ -22,11 +24,19 @@ function Dashboard() {
     }
 
     if (activePage === "Search") {
-      return <div className="p-6 text-neutral-500">Search coming soon...</div>;
+      return (
+        <div className="p-6 text-neutral-500">
+          <Search />
+        </div>
+      );
     }
 
     if (activePage === "Account") {
-      return <div className="p-6 text-neutral-500">Account coming soon...</div>;
+      return (
+        <div className="p-6 text-neutral-500">
+          <Account />
+        </div>
+      );
     }
 
     return (
