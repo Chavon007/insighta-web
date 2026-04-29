@@ -1,5 +1,5 @@
 function useAccount() {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = "https://identity-profile-api-service.vercel.app";
 
   const getMe = async () => {
     const res = await fetch(`${API_URL}/auth/me`, {
