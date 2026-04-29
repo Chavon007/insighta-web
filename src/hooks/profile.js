@@ -15,7 +15,7 @@ function useProfile() {
   };
 
   const getProfileDetails = async ({ id }) => {
-    const res = await fetch(`${API_URL}/API/Profiles/${id}`, {
+    const res = await fetch(`${API_URL}/api/Profiles/${id}`, {
       credentials: "include",
       headers: {
         "X-API-Version": "1",
