@@ -47,7 +47,24 @@ function useProfile() {
     window.URL.revokeObjectURL(url);
   };
 
-  return { getProfiles, getProfileDetails, exportProfiles };
+  const searchProfiles = async (q) => {
+    const res = await fetch(
+      `${API_URL}/api/profiles/search?q=${encodeURIComponent(q)}`,
+      {
+        credentials: "include",
+        headers: {
+          "X-API-Version": "1",
+        },
+      },
+    );
+
+    if (!res.ok) throw new Error("Search failed");
+
+    const data = await res.json();
+    return data;
+  };
+
+  return { getProfiles, getProfileDetails, exportProfiles, searchProfiles };
 }
 
 export default useProfile;
