@@ -10,13 +10,19 @@ function useAccount() {
 
     const res = await fetch(`${API_URL}/auth/me`, {
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
-    if (!res.ok) throw new Error("Failed to fetch account info");
     const data = await res.json();
-    return data;
+
+    console.log("ACCOUNT RESPONSE:", data); 
+
+    if (!res.ok) {
+      throw new Error(data.message || "Failed to fetch account info");
+    }
+
+    return data.data; 
   };
 
   const logout = async () => {
@@ -26,7 +32,7 @@ function useAccount() {
     await fetch(`${API_URL}/auth/logout`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "x-csrf-token": csrfToken,
       },
     });

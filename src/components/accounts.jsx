@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import useAccount from "@/hooks/account";
-import useAuth from "@/hooks/profile";
 
 function Account() {
-  const { getMe } = useAccount();
-  const { logout } = useAuth();
+  const { getMe, logout } = useAccount();
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,8 +13,8 @@ function Account() {
     const fetchUser = async () => {
       try {
         setLoading(true);
-        const data = await getMe();
-        setUser(data.data);
+        const userData = await getMe();
+        setUser(userData);
       } catch (err) {
         setError(err.message);
       } finally {
