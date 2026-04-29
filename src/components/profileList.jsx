@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useProfile from "@/hooks/profile";
 
 function ProfileList({ onSelect }) {
-  const { getProfiles } = useProfile();
+  const { getProfiles, exportProfiles } = useProfile();
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,6 +40,12 @@ function ProfileList({ onSelect }) {
         <p className="text-sm text-neutral-500">
           Manage and view all user profiles
         </p>
+        <button
+          onClick={() => exportProfiles()}
+          className="px-4 py-2 text-sm bg-neutral-900 text-white rounded-lg hover:bg-neutral-700 transition"
+        >
+          Export CSV
+        </button>
       </div>
 
       {/* Table */}

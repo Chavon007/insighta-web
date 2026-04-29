@@ -43,13 +43,8 @@ function ProfileDetails({ id, onBack }) {
           <h2 className="text-2xl font-semibold text-neutral-800 capitalize">
             {details.name}
           </h2>
-          {/* Export CSV button */}
-          <button
-            onClick={() => exportProfiles()}
-            className="px-4 py-2 text-sm bg-neutral-900 text-white rounded-lg hover:bg-neutral-700 transition"
-          >
-            Export CSV
-          </button>
+
+         
         </div>
 
         <div className="grid grid-cols-2 gap-4">
